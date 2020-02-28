@@ -24,9 +24,7 @@ import javax.annotation.Resource;
  * @see com.demo.demo.service.impl
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(
-        classes=DemoApplication.class)
-@WebAppConfiguration
+@SpringBootTest
 public class BsSgmtServiceImplTest {
 
     @Resource
@@ -36,7 +34,7 @@ public class BsSgmtServiceImplTest {
     private BsSgmtRepo bsSgmtRepo;
 
     @Test
-    void save() {
+    public void save() {
         BsSgmt bsSgmt = bsSgmtRepo.findOne(10000L);
         System.out.println(JSONObject.toJSONString(bsSgmt));
         bsSgmtService.save(bsSgmt);
