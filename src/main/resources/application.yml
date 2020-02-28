@@ -1,0 +1,19 @@
+#自定义配置。expire统一单位为秒
+cache:
+  cacheNullValues: true
+  defaultExpiration: 0
+  cachePrefix: riking:inner:subSystem:icirs
+  expires:
+    userInfo: 60
+    branchInfo: 60
+    topBranchInfo: 0
+    branchInfoByCode: 60
+    branchInfoList: 60
+    propertyConfig: 60
+    provinces: 0
+    dictValidate: 60
+hive:
+  url: jdbc:hive2://172.16.80.123:10000/cirs
+  driver-class-name: org.apache.hive.jdbc.HiveDriver
+  user: root
+  password: root

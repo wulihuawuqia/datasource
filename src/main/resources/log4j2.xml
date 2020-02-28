@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+	<Appenders>
+		<RollingFile name="RollingFile" fileName="/riking/logs/icirs/app-api.log"
+					 filePattern="/riking/logs/icirs/$${date:yyyy-MM}/app-api-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout charset="UTF-8">
+				<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="80 MB" />
+			</Policies>
+			<!-- 自动清理日志 -->
+			<DefaultRolloverStrategy>
+				<Delete basePath="${baseDir}/info" maxDepth="2">
+					<IfFileName glob="*/app-api-*.log.gz" />
+					<IfLastModified age="120d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+		<RollingFile name="ErroFile" fileName="/riking/logs/icirs/app-api-error.log"
+					 filePattern="/riking/logs/icirs/$${date:yyyy-MM}/app-api-error%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout charset="UTF-8">
+				<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="80 MB" />
+			</Policies>
+			<!-- 自动清理日志 -->
+			<DefaultRolloverStrategy>
+				<Delete basePath="${baseDir}/info" maxDepth="2">
+					<IfFileName glob="*/app-api-error*.log.gz" />
+					<IfLastModified age="120d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d - %m%n" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Logger name="org.apache.catalina.util.LifecycleBase" level="error" />
+		<Logger name="org.pbccrc" level="error" />
+		<Logger name="org.apache.coyote.http11.Http11NioProtocol" level="warn" />
+		<Logger name="org.apache.tomcat.util.net.NioSelectorPool" level="warn" />
+		<Logger name="org.apache.commons.beanutils.converters" level="warn" />
+        <Logger name="org.hibernate" level="warn" />
+        <Logger name="springfox.documentation" level="warn" />
+        <Logger name="com.ulisesbocchio" level="warn" />
+        <Logger name="org.quartz.core" level="warn" />
+        <Logger name="org.hibernate.SQL" level="DEBUG" />
+		<Logger name="org.springframework" level="warn" />
+		<Logger name="com.github" level="DEBUG" />
+		<Logger name="net.riking" level="DEBUG" />
+		<Root level="debug">
+			<AppenderRef ref="RollingFile" level="DEBUG" />
+			<AppenderRef ref="ErroFile" level="error" />
+			<AppenderRef ref="Console" level="DEBUG" />
+		</Root>
+	</Loggers>
+</Configuration> 
