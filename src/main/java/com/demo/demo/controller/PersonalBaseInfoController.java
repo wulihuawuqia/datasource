@@ -2,7 +2,6 @@ package com.demo.demo.controller;
 
 import com.demo.demo.dao.BsSgmtRepo;
 import com.demo.demo.entity.BsSgmt;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -49,7 +48,6 @@ public class PersonalBaseInfoController {
 	 * 根据参数获取数据
 	 * @return
 	 */
-	@ApiOperation(value = "根据参数获取所有")
 	@RequestMapping(value = "/getMore", method = RequestMethod.GET)
 	public List<BsSgmt> getMore() {
 		return bsSgmtRepo.findAll();
@@ -59,7 +57,6 @@ public class PersonalBaseInfoController {
      * 根据参数获取数据
      * @return
      */
-    @ApiOperation(value = "根据参数获取所有")
     @RequestMapping(value = "/getHiveMore", method = RequestMethod.GET)
     public List<Map<String, Object>> getHiveMore() {
         String sql = "select * from t_icirs_bs_sgmt";

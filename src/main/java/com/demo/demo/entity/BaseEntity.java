@@ -6,9 +6,6 @@ package com.demo.demo.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import net.riking.core.annos.Comment;
-import net.riking.core.entity.ILog;
-import net.riking.core.entity.LogConfig;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -27,7 +24,7 @@ import java.util.Date;
 @Comment("基础model,用于继承")
 @MappedSuperclass
 @JsonIgnoreProperties(ignoreUnknown = true, value = {"handler", "hibernateLazyInitializer", "fieldHandler"})
-public abstract class BaseEntity implements ILog {
+public abstract class BaseEntity {
     @Comment("创建时间")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createdTime", nullable = false, updatable = false)
@@ -222,8 +219,5 @@ public abstract class BaseEntity implements ILog {
         this.dataStatus = dataStatus;
     }
 
-    @Override
-    public LogConfig getLogConfig() {
-        return new LogConfig("id");
-    }
+
 }
