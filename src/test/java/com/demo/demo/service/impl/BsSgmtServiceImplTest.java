@@ -39,4 +39,9 @@ public class BsSgmtServiceImplTest {
         System.out.println(JSONObject.toJSONString(bsSgmt));
         bsSgmtService.save(bsSgmt);
     }
+
+    @Test
+    public void save1() {
+
+    }
 }

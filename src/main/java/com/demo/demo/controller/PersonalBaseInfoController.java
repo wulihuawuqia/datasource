@@ -2,11 +2,12 @@ package com.demo.demo.controller;
 
 import com.demo.demo.dao.BsSgmtRepo;
 import com.demo.demo.entity.BsSgmt;
-import com.demo.demo.hivedao.HiveBsSgmtRepo;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,8 @@ public class PersonalBaseInfoController {
     BsSgmtRepo bsSgmtRepo;
 
 	@Autowired
-    HiveBsSgmtRepo hiveBsSgmtRepo;
+	@Qualifier("hiveJdbcTemplate")
+	private JdbcTemplate hiveJdbcTemplate;
 
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -59,8 +61,10 @@ public class PersonalBaseInfoController {
      */
     @ApiOperation(value = "根据参数获取所有")
     @RequestMapping(value = "/getHiveMore", method = RequestMethod.GET)
-    public List<BsSgmt> getHiveMore() {
-        return hiveBsSgmtRepo.findAll();
+    public List<Map<String, Object>> getHiveMore() {
+        String sql = "select * from t_icirs_bs_sgmt";
+        List<Map<String, Object>> list = hiveJdbcTemplate.queryForList(sql);
+        return list;
     }
 
 }
